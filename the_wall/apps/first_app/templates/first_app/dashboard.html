@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="navbar">
+        <h3>Coding Dojo Wall</h3>
+        <h4>Welcome {{logged_user.first_name}} {{logged_user.last_name}}</h4>
+        <a href="/logout">Logout</a>
+    </div>
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li {% if message.tags %} class="{{message.tags }}" {% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div id="post-area">
+        <h4>Post a message</h4>
+        <form action="/message" method="POST">
+            {% csrf_token %}
+            <textarea name="message" id="" cols="60" rows="5"></textarea>
+            <p></p>
+            <button>Post</button>
+        </form>
+    </div>
+    {% for m in all_messages %}
+        <div class="message">
+            <p>{{m.user.first_name}} {{m.user.last_name}} -- {{m.created_at|date:'F jS Y'}}</p>
+            <h3>{{m.message}}</h3>
+            {% for c in m.comments.all %}
+                <div class="comment">
+                    <p>{{c.user.first_name}} {{c.user.last_name}} -- {{c.created_at|date:'F jS Y'}}</p>
+                    <h4>{{c.comment}}</h4>
+                </div>
+            {% endfor %}
+            <div>
+                <h5>Post a comment</h5>
+                <form action="/comment/{{m.id}}" method="POST">
+                    {% csrf_token %}
+                    <textarea  name="comment" id="" cols="60" rows="3"></textarea>
+                    <p><button>Post</button></p>
+                </form>
+            </div>
+        </div>
+    {% endfor %}
+</body>
+</html>

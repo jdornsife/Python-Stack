@@ -1,0 +1,38 @@
+.navbar > h3{
+    display:inline-block;
+    width:750px;
+}
+.navbar > h4{
+    display:inline-block;
+    width:400px;
+}
+.navbar{
+    padding:10px;
+    border-bottom:3px solid black;
+}
+#post-area{
+    text-align: center;
+}
+.message{
+    border:2px solid #cb22cc;
+    padding:25px;
+    width:750px;
+    margin:25px auto;
+    border-radius:10px;
+}
+.error{
+    background:#e64040;
+    padding:5px;
+    width:500px;
+    margin:10px auto;
+    list-style-type:none;
+    text-align:center;
+    color:white;
+    font-size:18px;
+    border-radius:10px;   
+}
+.comment{
+    margin-left:100px;
+    border:1px solid blue;
+    padding:10px;
+}
